@@ -1,7 +1,5 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+User.create(name: 'David Sands', email: "Davidmaxsands@gmail.com", password: '0')
+
+Project.create(project_name: "My Project", url: "example.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque elementum justo id fermentum. Nunc lorem velit, tincidunt eleifend sodales ac, ultricies quis dui. Etiam bibendum placerat dolor id imperdiet. Vivamus lobortis neque ante, nec vehicula nisl imperdiet ac.", generated_proj_id: 5236685945, user_id: 1)
+
+Analytic.create(referral_site: 'Google', event_id: '59', event_type: 'click', page_path: '/home', user_ip: '2601:283:4201:b350:1456:bcb1:d513:bef1', user_city: 'Englewood', user_country_code: 'US', user_country_name: 'USA', user_timezone: 'CST', user_languages: 'EN', user_os: 'MacOS', is_mobile: 'TRUE', project_id: 1 )
