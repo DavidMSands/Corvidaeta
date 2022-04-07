@@ -1,8 +1,8 @@
 import React from 'react'
 
-function EachProject() {
+function EachProject({ name }) {
   return (
-    <div>EachProject</div>
+    <div>{name}</div>
   )
 }
 

@@ -1,0 +1,321 @@
+:root {
+  --dark-background-clr: #1d1e24;
+  --dark-accent-clr: #ff7597;
+  --dark-text-clr: rgb(242, 242, 242);
+
+  --header-text: minion-pro, serif;
+  --secondary-text: 'Lato', sans-serif;
+}
+
+body {
+  background-color: var(--dark-background-clr);
+  color: var(--dark-text-clr);
+}
+
+h2 {
+  font-family: var(--header-text);
+}
+
+.App {
+  max-width: 1200px;
+  margin: auto;
+}
+
+.split {
+  display: grid;
+  max-width: 1500px;
+  margin: auto;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 1fr ;
+}
+
+/* =============
+ nav bar styling 
+ ============= */
+
+#logo {
+  max-width: 200px;
+}
+
+nav {
+border-left: solid 1px var(--dark-text-clr);
+}
+
+nav ul {
+  list-style: none;
+}
+
+nav ul li {
+  margin: 0px 0 50px 0;
+}
+
+nav ul li a {
+  color: var(--dark-text-clr);
+  text-decoration: none;
+  font-family: var(--secondary-text);
+  /* line-height: 3; */
+  font-size: 1.5rem;
+  font-weight: 100;
+}
+
+nav ul li a:hover {
+  color: var(--dark-accent-clr);
+}
+
+nav ul li:hover {
+  transform: translateY(-15%);
+}
+
+.is-active {
+  color: var(--dark-accent-clr);
+}
+
+/* ==================
+projects page styling 
+=================== */
+
+#projects-container {
+  margin-top: 40px;
+}
+
+#projects-container h2 {
+  font-size: 3.5rem;
+}
+
+#projects-container  p {
+  font-size: 1.5rem;
+}
+
+#project-input {
+    margin-top: 10px;
+    width: 300px;
+    height: 35px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 50px;
+    border: none;
+    background-color: #ffffffaf;
+}
+
+#myModal p {
+    margin-left: 205px;
+    margin-top: -10px;
+    width: 450px;
+    height: 125px;
+    padding: 10px;
+    text-align: center;
+    border-radius: 20px;
+    border: none;
+    background-color: #ffffffaf;
+    color: black;
+    text-align: left;
+    font-size: 1.1rem;
+}
+
+::-webkit-input-placeholder {
+  color: var(--dark-background-clr);
+  font-size: 1.2rem;
+}
+
+::-moz-placeholder {
+  color: var(--dark-background-clr);
+  font-size: 1.2rem;
+}
+
+:-ms-input-placeholder {
+  color: var(--dark-background-clr);
+  font-size: 1.2rem;
+}
+
+:-moz-placeholder {
+  color: var(--dark-background-clr);
+  font-size: 1.2rem;
+}
+
+#projects-container label {
+  font-size: 1.3rem;
+  margin-right: 20px;
+}
+
+.new-proj-submit {
+  background-color: var(--dark-accent-clr);
+  border-radius: 50px;
+  border: 2px solid var(--dark-accent-clr);
+  margin: 15px 0 0 135px;
+  width: 90px;
+  height: 40px;
+  font-size: 1.1rem;
+  color: var(--dark-background-clr);
+}
+
+.button {
+  background-color: var(--dark-accent-clr);
+  border-radius: 50px;
+  border: 2px solid var(--dark-accent-clr);
+  margin: 0px 0 0 210px;
+  width: 90px;
+  height: 40px;
+  font-size: 1.1rem;
+  color: var(--dark-background-clr);
+}
+
+input:focus {
+  outline-color: var(--dark-accent-clr);
+}
+
+#new-proj-submit:hover, .button:hover, #sign-btn:hover {
+  background-color: var(--dark-background-clr);
+  color: var(--dark-accent-clr);
+  cursor: pointer;
+}
+
+.modal {
+  display: none; 
+  position: fixed; 
+  z-index: 1; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
+  backdrop-filter: blur(4px);
+}
+
+.modal-show {
+  display: block; 
+  position: fixed;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto; 
+  background-color: rgba(0,0,0,0.4); 
+  backdrop-filter: blur(4px);
+  top: 0;
+  left: 0;
+  z-index: 1001;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  justify-items: center;
+}
+
+
+.modal-content {
+    background-color: var(--dark-background-clr);
+    border: 1px solid gray;
+    z-index: 1000;
+    width: 800px;
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative;
+    overflow-y: auto;
+    max-height: 90vh;
+    padding: 20px;
+}
+
+#modal-text {
+  font-size: 1.5rem;
+  padding-bottom: 20px;
+}
+
+/* =============
+ welcome styling 
+ ============== */
+
+#welcome-container {
+  max-width: 1500px;
+  margin: auto;
+  text-align: center;
+}
+
+#welcome-paragraph {
+  padding: 0 300px 0 300px;
+  font-size: 1.5rem;
+}
+
+#sign-btn {
+  background-color: var(--dark-accent-clr);
+  border-radius: 50px;
+  border: 2px solid var(--dark-accent-clr);
+  width: 90px;
+  height: 40px;
+  font-size: 1.1rem;
+  color: var(--dark-background-clr);
+}
+
+#login-container {
+  max-width: 1500px;
+  margin: auto;
+  text-align: center;
+}
+
+.forms {
+  position: fixed; 
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  align-items: center;
+  justify-items: center;
+}
+
+.input-field i {
+  position: absolute;
+}
+
+.input-field {
+  width: 110%;
+  margin-bottom: 10px;
+  color: rgb(96, 96, 96);
+}
+
+.input-field p:hover {
+  cursor: pointer;
+  color: var(--dark-accent-clr);
+}
+
+.field:focus {
+  outline-color: var(--dark-accent-clr);
+}
+
+.icon {
+  padding: 20px 15px;
+  min-width: 40px;
+  color: #9e9e9e;
+}
+
+.field {
+  margin-top: 10px;
+  width: 300px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  border: none;
+  background-color: #d6d5d551;
+}
+
+.field2 {
+  margin-top: 10px;
+  width: 300px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  border: none;
+  background-color: #d6d5d551;
+}
+
+.login-button {
+  margin-top: 10px;
+  width: 220px;
+  padding: 10px;
+  text-align: center;
+  border-radius: 50px;
+  border: solid .5px var(--dark-accent-clr);
+  background-color: var(--dark-accent-clr);
+  color: #666
+}
+
+.button:hover {
+  background-color: var(--dark-background-clr);
+  cursor: pointer;
+}

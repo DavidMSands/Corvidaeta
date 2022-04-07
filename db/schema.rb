@@ -38,7 +38,7 @@ ActiveRecord::Schema.define(version: 2022_04_05_213937) do
     t.string "project_name"
     t.string "url"
     t.text "description"
-    t.integer "generated_proj_id"
+    t.string "generated_proj_id"
     t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

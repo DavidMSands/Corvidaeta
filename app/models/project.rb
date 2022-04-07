@@ -1,4 +1,4 @@
 class Project < ApplicationRecord
-    has_one :analytic
+    has_many :analytics
     
 end
