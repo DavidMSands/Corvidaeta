@@ -15,10 +15,7 @@ import { useState, useEffect } from 'react'
 function App() {
   const [showNavBar, setShowNavBar] = useState(false)
   const [user, setUser] = useState(null)
-  const [newPost, setNewPost] = useState(null)
-  const [newProject, setNewProject] = useState(null) 
   const navigate = useNavigate()
-  const [profPic, setProfPic] = useState(null)
   const [pageLoaded, setPageLoaded] = useState(false)
   const state = useLocation()
 
@@ -35,7 +32,7 @@ function App() {
         .then(setPageLoaded(true))
       }
     }) 
-  }, [newPost, newProject])
+  }, [])
   
   function handleLogin(user) {
     setShowNavBar(true)
@@ -52,15 +49,17 @@ function App() {
     navigate('./login')
   }
 
+  
+
   return (
     <div className={showNavBar ? "App split" : null} >
-      {showNavBar ? <NavBar /> : null}
+      {showNavBar ? <NavBar handleLogout={handleLogout} /> : null}
        <Routes >
           <Route exact path="/" element={<WelcomePage />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/account" element={<Account />} />
-          <Route exact path="/projects" element={<Projects />} />
-          <Route exact path="/dashboard" element={<Dashboard />} />
+          <Route exact path="/projects" element={<Projects user={user} />} />
+          <Route exact path="/dashboard" element={<Dashboard user={user} />} />
           <Route exact path="/privacy" element={<Privacy />} />
           <Route exact path="/login" element={<Login onLogin={handleLogin} />} />
           <Route exact path="/payments" element={<Payments />} />

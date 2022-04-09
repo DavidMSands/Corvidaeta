@@ -32,7 +32,7 @@ function Login({ onLogin }) {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(userObj),
+      body: JSON.stringify(userObj ),
     })
       .then(r => {
         if (r.ok) {

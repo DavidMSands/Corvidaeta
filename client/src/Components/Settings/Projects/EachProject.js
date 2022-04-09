@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-function EachProject({ name }) {
+function EachProject({ name, id }) {
+  const [hideModal, setHideModal] = useState('modal')
   return (
-    <div>{name}</div>
+    <div className='ech-project-container'>
+      <span>{name}</span>
+      <span>{id}</span>
+      <span onClick={() => setHideModal('modal-show')} className='open-snippet'>Open code snippet</span>
+      <div id="myModal" class={hideModal}>
+        <div class="modal-content" id="modal-div">
+          <h2>{name} site code</h2>
+          <span id='modal-text'>Add this code to your site's &lt;head&gt; tag to start tracking your analytics.</span>
+          <form> 
+            <label htmlFor='project'>Generated Project ID: </label>
+            <input name='project' id='project-input' type='text' value={id} ></input><br/>
+            <label>Embed code: </label>
+            <p>&lt;script defer id='{id}' class="corvidaeta_script" src="https://cdn.jsdelivr.net/gh/DavidMSands/Corvidaeta-Script@new-final-script/var%20currentURL%20=%20window.location.href;.js"&gt;&lt;/script&gt;</p>
+            <br/>
+          </form>
+          <button className='button' onClick={() => setHideModal('modal')}>Close</button>     
+        </div>
+        </div>
+    </div>
   )
 }
 

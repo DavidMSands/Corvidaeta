@@ -2,8 +2,16 @@ Rails.application.routes.draw do
   
   resources :analytics
   resources :projects, only: [:create]
-  resources :users
+  resources :users, only: [:create]
   post "/login", to: "sessions#create"
+
+  get '/total_views/:id,:project_id', to: "analytics#total_views"
+  get '/unique_views/:id,:project_id', to: "analytics#unique_views"
+  get '/pages_visted/:id,:project_id', to: "analytics#pages_visted"
+  get '/device/:id,:project_id', to: "analytics#device"
+  get '/countries/:id,:project_id', to: "analytics#countries"
+  get '/referral_site/:id,:project_id', to: "analytics#referral"
+
   get "/me", to: "users#show"
   get '/my_projects/:id', to: 'projects#my_projects'
   post '/create_analytics/:generated_proj_id', to: 'analytics#create_analytics'

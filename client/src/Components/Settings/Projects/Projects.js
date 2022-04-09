@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
 import EachProject from './EachProject'
 
-function Projects() {
+function Projects({ user }) {
   const [projects, setProjects] = useState([])
   const [projectName, setProjectName] = useState()
   const [modalObj, setModalObj] = useState()
   const [hideModal, setHideModal] = useState('modal')
 
   useEffect(() => {
-    fetch('/my_projects/1')
+    fetch(`/my_projects/${user?.id}`)
     .then(res => res.json())
     .then(projects => setProjects(projects))
   }, [hideModal])
@@ -59,10 +59,24 @@ function Projects() {
           <button className='button' onClick={() => setHideModal('modal')}>Close</button>     
         </div>
       </div>
-      <h3>Manage projects</h3>
-      {projects.map(project => (
-        <EachProject name={project.project_name} id={project.generated_proj_id} />
-      ))}
+      <div id="my-projects">
+        <h3>Manage projects</h3>
+        <div className='ech-project-container each-header'>
+          <span>Project Name:</span>
+          <span>Project ID:</span>
+          <span>Project code snippet:</span>
+        </div>
+        {projects.map(project => (
+          <EachProject
+          name={project.project_name}
+          id={project.generated_proj_id}
+          hideModal={hideModal}
+          setHideModal={setHideModal}
+          modalObj={modalObj}
+          handleNewProj={handleNewProj}
+          />
+        ))}
+      </div>
     </div>
   )
 }

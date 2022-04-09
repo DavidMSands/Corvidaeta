@@ -38,7 +38,8 @@ h2 {
 }
 
 nav {
-border-left: solid 1px var(--dark-text-clr);
+  border-left: solid 1px var(--dark-text-clr);
+  
 }
 
 nav ul {
@@ -66,6 +67,10 @@ nav ul li:hover {
   transform: translateY(-15%);
 }
 
+.inactive .feather {
+  display: none;
+}
+
 .is-active {
   color: var(--dark-accent-clr);
 }
@@ -84,6 +89,7 @@ projects page styling
 
 #projects-container  p {
   font-size: 1.5rem;
+  margin-bottom: 100px;
 }
 
 #project-input {
@@ -141,7 +147,7 @@ projects page styling
   background-color: var(--dark-accent-clr);
   border-radius: 50px;
   border: 2px solid var(--dark-accent-clr);
-  margin: 15px 0 0 135px;
+  margin: 15px 0 0 140px;
   width: 90px;
   height: 40px;
   font-size: 1.1rem;
@@ -163,7 +169,7 @@ input:focus {
   outline-color: var(--dark-accent-clr);
 }
 
-#new-proj-submit:hover, .button:hover, #sign-btn:hover {
+#new-proj-submit:hover, .new-proj-submit:hover, .button:hover, #sign-btn:hover, .logout-btn:hover {
   background-color: var(--dark-background-clr);
   color: var(--dark-accent-clr);
   cursor: pointer;
@@ -218,6 +224,36 @@ input:focus {
   padding-bottom: 20px;
 }
 
+#projects-container h3 {
+  font-size: 2rem;
+  margin-top: 100px;
+}
+
+.ech-project-container {
+  border-bottom: 1px solid white;
+  padding: 10px 0 10px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.each-header {
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.open-snippet {
+  color: var(--dark-accent-clr);
+}
+
+.open-snippet:hover {
+  cursor: pointer;
+}
+
+#my-projects {
+  margin-top: 100px;
+  border-top: .5px solid var(--dark-accent-clr);
+}
+
 /* =============
  welcome styling 
  ============== */
@@ -233,7 +269,7 @@ input:focus {
   font-size: 1.5rem;
 }
 
-#sign-btn {
+#sign-btn, .logout-btn {
   background-color: var(--dark-accent-clr);
   border-radius: 50px;
   border: 2px solid var(--dark-accent-clr);
@@ -319,3 +355,30 @@ input:focus {
   background-color: var(--dark-background-clr);
   cursor: pointer;
 }
+
+#dash-container {
+  text-align: center;
+}
+
+#bar-container {
+  margin: 10px 0 0 0;
+}
+
+
+
+#area-chart {
+  margin-top: 100px;
+  background-color: #2e2e30;
+  padding: 15px 20px 15px 20px;
+  border-radius: 10px;
+}
+
+.bar-container {
+  background-color: #2e2e30;
+  margin: 10px;
+  border-radius: 10px;
+  padding-bottom: 20px;
+}
+
+
+
