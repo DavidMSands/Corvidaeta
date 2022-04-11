@@ -5,12 +5,12 @@ Rails.application.routes.draw do
   resources :users, only: [:create]
   post "/login", to: "sessions#create"
 
-  get '/total_views/:id,:project_id', to: "analytics#total_views"
-  get '/unique_views/:id,:project_id', to: "analytics#unique_views"
-  get '/pages_visted/:id,:project_id', to: "analytics#pages_visted"
-  get '/device/:id,:project_id', to: "analytics#device"
-  get '/countries/:id,:project_id', to: "analytics#countries"
-  get '/referral_site/:id,:project_id', to: "analytics#referral"
+  get '/total_views/:id,:project_id,:start_date,:end_date', to: "analytics#total_views"
+  get '/unique_views/:id,:project_id,:start_date,:end_date', to: "analytics#unique_views"
+  get '/pages_visted/:id,:project_id,:start_date,:end_date', to: "analytics#pages_visted"
+  get '/device/:id,:project_id,:start_date,:end_date', to: "analytics#device"
+  get '/countries/:id,:project_id,:start_date,:end_date', to: "analytics#countries"
+  get '/referral_site/:id,:project_id,:start_date,:end_date', to: "analytics#referral"
 
   get "/me", to: "users#show"
   get '/my_projects/:id', to: 'projects#my_projects'

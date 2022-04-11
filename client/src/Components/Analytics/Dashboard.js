@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { AreaChart, BarChart, Bar, Legend, LabelList, Label, ResponsiveContainer, Cell, Area, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts'
+import { AreaChart, BarChart, Bar, Legend, LabelList, Area, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts'
+import "react-dates/initialize";
+import "react-dates/lib/css/_datepicker.css";
+import { DateRangePicker } from "react-dates";
+import '../../react_dates_overrides.css'
+
 
 
 function Dashboard({user}) {
@@ -9,38 +14,60 @@ function Dashboard({user}) {
   const [data4, setData4] = useState()
   const [data5, setData5] = useState()
   const [projects, setProjects] = useState([])
-  const [currentProject, setCurrentProject] = useState()  
+  const [currentProject, setCurrentProject] = useState() 
+  const [isSharp, setIsSharp] = useState(false)
+  const [dateRange, setdateRange] = useState({
+    startDate: null,
+    endDate: null
+  });
+  const [focus, setFocus] = useState(null);
+
+  const { startDate, endDate } = dateRange;
+  let oneWeekPast = new Date()
+  let pastDate = oneWeekPast.getDate() - 7
+  oneWeekPast.setDate(pastDate)
+
+  const handleOnDateChange = (startDate, endDate) =>
+  setdateRange(startDate, endDate);
+
+  const pathParams = `${user.id},${currentProject},${startDate === null ? convert(oneWeekPast) : convert(startDate?._d)},${endDate === null ? convert(new Date()) : convert(endDate?._d)}`
+
+  function convert(str) {
+    let date = new Date(str),
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+      day = ("0" + date.getDate()).slice(-2);
+    return [date.getFullYear(), mnth, day].join("-");
+  }
+   
   useEffect(() => {
-    fetch(`pages_visted/${user.id},${currentProject}`)
+    fetch(`pages_visted/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData2(stats))
-  }, [currentProject])
-
-  console.log(projects)
+  }, [currentProject, dateRange])
 
   useEffect(() => {
-    fetch(`/unique_views/${user.id},${currentProject}`)
+    fetch(`/unique_views/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData1(stats))
-  }, [currentProject])
+  }, [currentProject, dateRange])
 
   useEffect(() => {
-    fetch(`/device/${user.id},${currentProject}`)
+    fetch(`/device/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData3(stats))
-  }, [currentProject])
+  }, [currentProject, dateRange])
 
   useEffect(() => {
-    fetch(`/countries/${user.id},${currentProject}`)
+    fetch(`/countries/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData4(stats))
-  }, [currentProject])
+  }, [currentProject, dateRange])
 
   useEffect(() => {
-    fetch(`/referral_site/${user.id},${currentProject}`)
+    fetch(`/referral_site/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData5(stats))
-  }, [currentProject])
+  }, [currentProject, dateRange])
 
   useEffect(() => {
     fetch(`/my_projects/${user?.id}`)
@@ -51,25 +78,43 @@ function Dashboard({user}) {
     })
   }, [])
 
-  // const data = [{name: 'Page A', uv: 400, pv: 2400, amt: 2400}, {name: 'Page b', uv: 500, pv: 2300, amt: 2300}, {name: 'Page b', uv: 200, pv: 2300, amt: 2300}];
+
   return (
     <div id='dash-container' style={{ color: '#FFFFFF' }}>
-      <label for="cars">My projects:</label>
-      <select name="cars" id="cars" onChange={e => setCurrentProject(e.target.value)}>
-        {projects.map(project => (
-          <option value={project?.id} >{project.project_name}</option>
-        ))}
-      </select>
+      <div id="filter-container">
+        <div>
+          <label for="projects" id='proj-label'>My projects:</label>
+          <select name="projects" id="projects" onChange={e => setCurrentProject(e.target.value)}>
+            {projects.map(project => (
+              <option value={project?.id} >{project.project_name}</option>
+            ))}
+          </select>
+        </div>
+        <DateRangePicker
+          startDatePlaceholderText="Start"
+          startDate={startDate}
+          onDatesChange={handleOnDateChange}
+          endDatePlaceholderText="End"
+          endDate={endDate}
+          numberOfMonths={1}
+          isOutsideRange={() => false}
+          showClearDates={true}
+          focusedInput={focus}
+          onFocusChange={focus => setFocus(focus)}
+          startDateId="startDateMookh"
+          endDateId="endDateMookh"
+        />
+      </div>
       <div id="area-chart">
         <h2>Views</h2>
-        <AreaChart width={1000} height={400} data={data1} >
+        <AreaChart width={1000} height={400} data={data1}  onMouseOver={() => setIsSharp(!isSharp)} onMouseOut={() => setIsSharp(!isSharp)} >
           <Tooltip />
-          <Area type="" dataKey="count" stroke="#bb86fc" fill='#bb86fc' />
-          <Area type="" dataKey="unique" stroke="#fa6c90" fill='#ff7598bf' />
+          <Area type={isSharp ? "" : "monotone"} dataKey="count" stroke="#bb86fc" fill='#bb86fc' />
+          <Area type={isSharp ? "" : "monotone"} dataKey="unique" stroke="#fa6c90" fill='#ff7598bf'   />
           <CartesianGrid stroke="#fff" strokeDasharray="3 3"  />
           <XAxis dataKey="name" stroke="#fff" />
           <Legend />
-          <YAxis stroke="#fff" hide />
+          <YAxis stroke="#fff"  />
         </AreaChart>
       </div>
       <div id="bar-container">
@@ -90,10 +135,10 @@ function Dashboard({user}) {
                   }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" hide />
-                  <YAxis type="category"  width={80}  dataKey="page" stroke="#fff" style={{ color: '#FFFFFF' }}/>
+                  <YAxis type="category" hide  />
                   <Tooltip />
-                  <Bar type='monotone' dataKey="count" fill="#ff7598bf">
-                    {/* <LabelList dataKey="page" fill="#fff" className='label-list'/> */}
+                  <Bar dataKey="count" fill="#ff7598bf">
+                    <LabelList dataKey="page" fill="#fff"  position='insideLeft' />
                   </Bar>
                 </BarChart>
             </div>
@@ -114,10 +159,10 @@ function Dashboard({user}) {
                   }}>
                   <CartesianGrid strokeDasharray="3 3" />
                   <XAxis type="number" hide />
-                  <YAxis type="category"  width={50} className='bar-y' margin={{ right: 200 }} stroke="#fff" dataKey="is_mobile"/>
+                  <YAxis type="category" hide />
                   <Tooltip />
-                  <Bar type='monotone' dataKey="count" fill="#ff7598bf">
-                    {/* <LabelList dataKey="is_mobile" fill="#fff"/> */}
+                  <Bar dataKey="count" fill="#ff7598bf">
+                    <LabelList dataKey="is_mobile" fill="#fff" position='insideLeft'/>
                   </Bar>
                 </BarChart>
               </div>
@@ -139,10 +184,10 @@ function Dashboard({user}) {
                 }}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis type="number" hide />
-                <YAxis type="category" width={90}  stroke="#fff" dataKey="country"/>
+                <YAxis type="category" hide />
                 <Tooltip />
-                <Bar type='monotone' dataKey="count" fill="#ff7598bf">
-                {/* <LabelList dataKey="country" fill="#fff"/> */}
+                <Bar dataKey="count" fill="#ff7598bf">
+                <LabelList dataKey="country" fill="#fff" position='insideLeft'/>
                 </Bar>
               </BarChart>
           </div>
@@ -160,11 +205,11 @@ function Dashboard({user}) {
                   bottom: 5,
                 }}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" hide stroke="#fff" />
-                <YAxis type="category"  width={150} padding={{ right: 200 }} stroke="#fff" dataKey="referral"/>
+                <XAxis type="number" hide  />
+                <YAxis type="category" hide />
                 <Tooltip />
-                <Bar type='monotone' dataKey="count" fill="#ff7598bf">
-                {/* <LabelList dataKey="referral" fill="#fff"/> */}
+                <Bar dataKey="count" fill="#ff7598bf">
+                <LabelList dataKey="referral" fill="#fff" position='insideLeft' />
                 </Bar>
               </BarChart>
             </div>

@@ -4,6 +4,7 @@ import logo from '../logo.svg'
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdEmail,  } from 'react-icons/md'
 import { FaLock } from 'react-icons/fa';
+import logo2 from '../Data/CORVIDAETA.svg'
 
 function Login({ onLogin }) {
   const [showLogin, setShowLogin] = useState(true)
@@ -55,6 +56,7 @@ function Login({ onLogin }) {
     {/* <hr className="blockline"></hr> */}
       <div id="login-container">
         {/* <img src={logo} alt="logo" id="login-logo"/> */}
+        <img src={logo2} alt='logo2' id="logo2"/>
         <div className="forms">
         {showLogin ?
         <form id="login">

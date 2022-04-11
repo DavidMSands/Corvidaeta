@@ -295,6 +295,16 @@ input:focus {
   justify-items: center;
 }
 
+#logo2{
+  position: fixed; 
+  top: 33%;
+  left: 51.3%;
+  transform: translate(-50%, -50%);
+  margin: auto;
+  align-items: center;
+  justify-items: center;
+}
+
 .input-field i {
   position: absolute;
 }
@@ -364,10 +374,7 @@ input:focus {
   margin: 10px 0 0 0;
 }
 
-
-
 #area-chart {
-  margin-top: 100px;
   background-color: #2e2e30;
   padding: 15px 20px 15px 20px;
   border-radius: 10px;
@@ -378,6 +385,16 @@ input:focus {
   margin: 10px;
   border-radius: 10px;
   padding-bottom: 20px;
+}
+
+#filter-container {
+  margin: 100px 0 20px 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+#proj-label {
+  font-size: 1.5rem;
 }
 
 

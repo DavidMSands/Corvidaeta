@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
-function EachProject({ name, id }) {
+function EachProject({ name, id, tableId }) {
   const [hideModal, setHideModal] = useState('modal')
   return (
     <div className='ech-project-container'>
-      <span>{name}</span>
+      <Link to={`/projects/${tableId}`}><span>{name}</span></Link> 
       <span>{id}</span>
       <span onClick={() => setHideModal('modal-show')} className='open-snippet'>Open code snippet</span>
       <div id="myModal" class={hideModal}>

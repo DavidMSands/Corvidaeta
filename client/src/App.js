@@ -8,9 +8,11 @@ import WelcomePage from './Components/WelcomePage';
 import Settings from './Components/Settings/Settings';
 import Payments from './Components/Settings/Payments';
 import NavBar from './Components/NavBar';
+import Project from './Components/Settings/Projects/Project';
 import { useNavigate } from 'react-router';
 import { Routes, Route, useLocation } from "react-router-dom"
 import { useState, useEffect } from 'react'
+
 
 function App() {
   const [showNavBar, setShowNavBar] = useState(false)
@@ -63,6 +65,7 @@ function App() {
           <Route exact path="/privacy" element={<Privacy />} />
           <Route exact path="/login" element={<Login onLogin={handleLogin} />} />
           <Route exact path="/payments" element={<Payments />} />
+          <Route exact path="/projects/:id" element={<Project />} />
       </Routes>
      
     </div>

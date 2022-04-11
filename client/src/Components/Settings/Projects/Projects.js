@@ -69,6 +69,7 @@ function Projects({ user }) {
         {projects.map(project => (
           <EachProject
           name={project.project_name}
+          tableId={project.id}
           id={project.generated_proj_id}
           hideModal={hideModal}
           setHideModal={setHideModal}

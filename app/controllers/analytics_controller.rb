@@ -37,14 +37,14 @@ class AnalyticsController < ApplicationController
     end
 
     def referral
-        user_analytics = find_user_analytics.map{ |a| { referral: a.referral_site, date: a.created_at.to_date } }
+        user_analytics = find_user_analytics.map{ |a| { referral: a.referral_site } }
         render json: user_analytics.pluck(:referral).tally.map{ |e| {referral: e[0].to_s, count: e[1] }}
     end
   
     private
 
     def find_user_analytics 
-        User.find(params[:id]).analytics.where(project_id: params[:project_id])
+        User.find(params[:id]).analytics.where("project_id = ? AND analytics.created_at >= ? AND analytics.created_at <= ?", params[:project_id], params[:start_date], params[:end_date])
     end
 
     
