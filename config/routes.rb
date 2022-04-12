@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/referral_site/:id,:project_id,:start_date,:end_date', to: "analytics#referral"
   get '/average_time_on_site/:id,:project_id,:start_date,:end_date', to: "durations#time"
 
-  get "/me", to: "users#show"
+  get "/me", to: "sessions#show"
   get '/my_projects/:id', to: 'projects#my_projects'
   post '/create_analytics/:generated_proj_id', to: 'analytics#create_analytics'
   post '/create_durations/:generated_proj_id', to: 'durations#create_durations'

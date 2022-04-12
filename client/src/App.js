@@ -62,8 +62,8 @@ function App() {
           <Route exact path="/" element={<WelcomePage />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/account" element={<Account />} />
-          <Route exact path="/projects" element={<Projects user={user}  />} />
-          <Route exact path="/dashboard" element={<Dashboard user={user} />} />
+          <Route exact path="/projects" element={<Projects user={user} setShowNavBar={setShowNavBar} />} />
+          <Route exact path="/dashboard" element={<Dashboard user={user} setShowNavBar={setShowNavBar} />} />
           <Route exact path="/privacy" element={<Privacy />} />
           <Route exact path="/login" element={<Login onLogin={handleLogin} />} />
           <Route exact path="/payments" element={<Payments />} />

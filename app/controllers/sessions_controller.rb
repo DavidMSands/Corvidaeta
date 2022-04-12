@@ -1,5 +1,14 @@
 class SessionsController < ApplicationController
 
+    def show 
+        user = User.find(session[:user_id])
+        if user 
+            render json: user, status: :ok
+        else 
+            render json: { error: "Not authorized" }, status: :unauthorized
+        end
+    end
+
     def create 
         user = User.find_by(email: params[:email])
         if user&.authenticate(params[:password])

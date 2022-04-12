@@ -1,19 +1,33 @@
 import React, { useState, useEffect } from 'react'
 import EachProject from './EachProject'
 
-function Projects({ user }) {
+function Projects({ setShowNavBar }) {
   const [projects, setProjects] = useState([])
   const [projectName, setProjectName] = useState()
   const [modalObj, setModalObj] = useState()
   const [hideModal, setHideModal] = useState('modal')
+  const [user, setUser] = useState(null)
+  const [pageLoaded, setPageLoaded] = useState(false)
+
+  useEffect(() => {
+    fetch('/me').then(r => {
+      if (r.ok) {
+        r.json()
+        .then(user => setUser(() => user))
+        .then(setShowNavBar(true))
+      } else {
+        r.json()
+      }
+    }) 
+  }, [])
 
   useEffect(() => {
     fetch(`/my_projects/${user?.id}`)
     .then(res => res.json())
     .then(projects => setProjects(projects))
-  }, [hideModal])
+  }, [hideModal, user])
   
-
+  console.log(user)
   const handleNewProj = (e) => {
       e.preventDefault()
       let generatedProjId = 'C' + Math.floor(Math.random() * Date.now())

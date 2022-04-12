@@ -8,7 +8,7 @@ import '../../react_dates_overrides.css'
 
 
 
-function Dashboard({user}) {
+function Dashboard({ setShowNavBar }) {
   const [data1, setData1] = useState(false)
   const [data2, setData2] = useState()
   const [data3, setData3] = useState()
@@ -17,6 +17,7 @@ function Dashboard({user}) {
   const [projects, setProjects] = useState([])
   const [currentProject, setCurrentProject] = useState() 
   const [isSharp, setIsSharp] = useState(false)
+  const [user, setUser] = useState(null)
   const [dateRange, setdateRange] = useState({
     startDate: null,
     endDate: null
@@ -35,7 +36,19 @@ function Dashboard({user}) {
   const handleOnDateChange = (startDate, endDate) =>
   setdateRange(startDate, endDate);
 
-  const pathParams = `${user.id},${currentProject},${startDate === null ? convert(oneWeekPast) : convert(startDate?._d)},${endDate === null ? convert(new Date()) : convert(endDate?._d)}`
+  const pathParams = `${user?.id},${currentProject},${startDate === null ? convert(oneWeekPast) : convert(startDate?._d)},${endDate === null ? convert(new Date()) : convert(endDate?._d)}`
+  console.log(data1)
+  useEffect(() => {
+    fetch('/me').then(r => {
+      if (r.ok) {
+        r.json()
+        .then(user => setUser(() => user))
+        .then(setShowNavBar(true))
+      } else {
+        r.json()
+      }
+    }) 
+  }, [])
 
   function convert(str) {
     let date = new Date(str),
@@ -64,9 +77,11 @@ function Dashboard({user}) {
   }, [currentProject, dateRange])
 
   useEffect(() => {
+    if(user) {
     fetch(`/unique_views/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData1(stats))
+  }
   }, [currentProject, dateRange])
 
   useEffect(() => {
@@ -88,13 +103,15 @@ function Dashboard({user}) {
   }, [currentProject, dateRange])
 
   useEffect(() => {
-    fetch(`/my_projects/${user?.id}`)
+    if(user) {
+      fetch(`/my_projects/${user?.id}`)
     .then(res => res.json())
     .then(projects => {
       setProjects(projects)
-      setCurrentProject(projects[0].id)
+      setCurrentProject(projects[0]?.id)
     })
-  }, [])
+  }
+  }, [user])
 
   useEffect(() => {
     fetch(`/average_time_on_site/${pathParams}`)
@@ -113,8 +130,8 @@ function Dashboard({user}) {
         <div>
           <label for="projects" id='proj-label'>My projects:</label>
           <select name="projects" id="projects" onChange={e => setCurrentProject(e.target.value)}>
-            {projects.map(project => (
-              <option value={project?.id} >{project.project_name}</option>
+            {projects?.map(project => (
+              <option value={project?.id} >{project?.project_name}</option>
             ))}
           </select>
         </div>
