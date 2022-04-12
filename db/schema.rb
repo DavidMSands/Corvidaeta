@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_05_213937) do
+ActiveRecord::Schema.define(version: 2022_04_12_045141) do
 
   create_table "analytics", force: :cascade do |t|
     t.string "referral_site"
@@ -29,6 +29,13 @@ ActiveRecord::Schema.define(version: 2022_04_05_213937) do
     t.string "click_id"
     t.string "click_class"
     t.time "event_time"
+    t.integer "project_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "durations", force: :cascade do |t|
+    t.integer "elapsed"
     t.integer "project_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

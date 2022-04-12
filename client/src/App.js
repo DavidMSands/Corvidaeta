@@ -20,8 +20,17 @@ function App() {
   const navigate = useNavigate()
   const [pageLoaded, setPageLoaded] = useState(false)
   const state = useLocation()
+  
+  
 
-  console.log(user)
+  function handleLogin(user) {
+    setShowNavBar(true)
+    setUser(() => user)
+    const path = state?.pathname 
+    if (path === '/login') {
+      navigate('/projects')
+    } 
+  }
 
   useEffect(() => {
     fetch('/me').then(r => {
@@ -36,14 +45,7 @@ function App() {
     }) 
   }, [])
   
-  function handleLogin(user) {
-    setShowNavBar(true)
-    setUser(() => user)
-    const path = state?.pathname 
-    if (path === '/login') {
-      navigate('/projects')
-    } 
-  }
+  
 
   function handleLogout() {
     setShowNavBar(false)
@@ -60,7 +62,7 @@ function App() {
           <Route exact path="/" element={<WelcomePage />} />
           <Route exact path="/settings" element={<Settings />} />
           <Route exact path="/account" element={<Account />} />
-          <Route exact path="/projects" element={<Projects user={user} />} />
+          <Route exact path="/projects" element={<Projects user={user}  />} />
           <Route exact path="/dashboard" element={<Dashboard user={user} />} />
           <Route exact path="/privacy" element={<Privacy />} />
           <Route exact path="/login" element={<Login onLogin={handleLogin} />} />

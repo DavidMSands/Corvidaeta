@@ -3,12 +3,13 @@ import { AreaChart, BarChart, Bar, Legend, LabelList, Area, CartesianGrid, Toolt
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
+import { HiStatusOnline } from 'react-icons/hi'
 import '../../react_dates_overrides.css'
 
 
 
 function Dashboard({user}) {
-  const [data1, setData1] = useState()
+  const [data1, setData1] = useState(false)
   const [data2, setData2] = useState()
   const [data3, setData3] = useState()
   const [data4, setData4] = useState()
@@ -20,7 +21,11 @@ function Dashboard({user}) {
     startDate: null,
     endDate: null
   });
-  const [focus, setFocus] = useState(null);
+  const [focus, setFocus] = useState(null)
+  const [avgMs, setAvgMs] = useState(false)
+  const [sumMs, setSumMs] = useState(false)
+  const [showVisitors, setShowVisitors] = useState(true)
+  const [showViews, setShowViews] = useState(true)
 
   const { startDate, endDate } = dateRange;
   let oneWeekPast = new Date()
@@ -35,12 +40,25 @@ function Dashboard({user}) {
   function convert(str) {
     let date = new Date(str),
       mnth = ("0" + (date.getMonth() + 1)).slice(-2),
-      day = ("0" + date.getDate()).slice(-2);
-    return [date.getFullYear(), mnth, day].join("-");
+      day = ("0" + date.getDate()).slice(-2)
+    return [date.getFullYear(), mnth, day].join("-")
   }
+
+  function msToMinAndSec(ms) {
+    var minutes = Math.floor(ms / 60000);
+    var seconds = ((ms % 60000) / 1000).toFixed(0)
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds
+  }
+
+  function sum(items, prop) {
+    return items.reduce((a, b) => {
+      return a + b[prop]
+    }, 0)
+  }
+
    
   useEffect(() => {
-    fetch(`pages_visted/${pathParams}`)
+    fetch(`/pages_visted/${pathParams}`)
     .then(res => res.json())
     .then(stats => setData2(stats))
   }, [currentProject, dateRange])
@@ -78,6 +96,16 @@ function Dashboard({user}) {
     })
   }, [])
 
+  useEffect(() => {
+    fetch(`/average_time_on_site/${pathParams}`)
+    .then(res => res.json())
+    .then(mill => {
+      setAvgMs(mill.avg)
+      setSumMs(mill.total)
+    })
+  }, [currentProject, dateRange])
+
+  
 
   return (
     <div id='dash-container' style={{ color: '#FFFFFF' }}>
@@ -105,16 +133,34 @@ function Dashboard({user}) {
           endDateId="endDateMookh"
         />
       </div>
+      <div id='overview-container'>
+        <div>
+          <p className='totals' onClick={() => setShowVisitors(!showVisitors)}>{data1 ? sum(data1, "unique") : 0}</p>
+          <p>Total visitors {showVisitors ? <HiStatusOnline id='pink-status'/> : null}</p>
+        </div>
+        <div>
+          <p className='totals' onClick={() => setShowViews(!showViews)}>{data1 ? sum(data1, "count") : 0}</p>
+          <p>All page views {showViews ? <HiStatusOnline id='purple-status'/> : null}</p>
+        </div>
+        <div>
+          <p className='totals'>{avgMs ? msToMinAndSec(avgMs) : '0:00'}</p>
+          <p>Average time on site</p>
+        </div>
+        <div>
+          <p className='totals'>{sumMs ? msToMinAndSec(sumMs) : '0:00'}</p>
+          <p>Total time on site</p>
+        </div>
+      </div>
       <div id="area-chart">
         <h2>Views</h2>
         <AreaChart width={1000} height={400} data={data1}  onMouseOver={() => setIsSharp(!isSharp)} onMouseOut={() => setIsSharp(!isSharp)} >
           <Tooltip />
-          <Area type={isSharp ? "" : "monotone"} dataKey="count" stroke="#bb86fc" fill='#bb86fc' />
-          <Area type={isSharp ? "" : "monotone"} dataKey="unique" stroke="#fa6c90" fill='#ff7598bf'   />
+          {showViews ? <Area type={isSharp ? "" : "monotone"} dataKey="count" stroke="#bb86fc" fill='#bb86fc' /> : null }
+          {showVisitors ? <Area type={isSharp ? "" : "monotone"} dataKey="unique" stroke="#fa6c90" fill='#ff7598bf' /> : null }
           <CartesianGrid stroke="#fff" strokeDasharray="3 3"  />
           <XAxis dataKey="name" stroke="#fff" />
           <Legend />
-          <YAxis stroke="#fff"  />
+          <YAxis stroke="#fff" hide />
         </AreaChart>
       </div>
       <div id="bar-container">

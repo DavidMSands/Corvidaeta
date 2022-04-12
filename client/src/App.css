@@ -1,10 +1,15 @@
 :root {
-  --dark-background-clr: #1d1e24;
+  --dark-background-clr: #26272e;
   --dark-accent-clr: #ff7597;
+  --dark-accent-clr-purple: #bb86fc;
+  --delete-red: #ff4d6a;
   --dark-text-clr: rgb(242, 242, 242);
 
   --header-text: minion-pro, serif;
   --secondary-text: 'Lato', sans-serif;
+
+  --btn-br: 50px;
+  --container-br: 10px;
 }
 
 body {
@@ -87,18 +92,19 @@ projects page styling
   font-size: 3.5rem;
 }
 
-#projects-container  p {
+#projects-container p, #projects-container label {
   font-size: 1.5rem;
   margin-bottom: 100px;
+  color: rgba(255, 255, 255, 0.659);
 }
 
-#project-input {
+#project-input, #confirm {
     margin-top: 10px;
     width: 300px;
     height: 35px;
     padding: 10px;
     text-align: center;
-    border-radius: 50px;
+    border-radius: var(--btn-br);
     border: none;
     background-color: #ffffffaf;
 }
@@ -145,7 +151,7 @@ projects page styling
 
 .new-proj-submit {
   background-color: var(--dark-accent-clr);
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: 2px solid var(--dark-accent-clr);
   margin: 15px 0 0 140px;
   width: 90px;
@@ -156,7 +162,7 @@ projects page styling
 
 .button {
   background-color: var(--dark-accent-clr);
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: 2px solid var(--dark-accent-clr);
   margin: 0px 0 0 210px;
   width: 90px;
@@ -254,6 +260,15 @@ input:focus {
   border-top: .5px solid var(--dark-accent-clr);
 }
 
+.ech-project-container a {
+  text-decoration: none;
+  color: #fff;
+}
+
+.ech-project-container a:hover {
+  color: var(--dark-accent-clr);
+}
+
 /* =============
  welcome styling 
  ============== */
@@ -271,7 +286,7 @@ input:focus {
 
 #sign-btn, .logout-btn {
   background-color: var(--dark-accent-clr);
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: 2px solid var(--dark-accent-clr);
   width: 90px;
   height: 40px;
@@ -335,7 +350,7 @@ input:focus {
   width: 300px;
   padding: 10px;
   text-align: center;
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: none;
   background-color: #d6d5d551;
 }
@@ -345,7 +360,7 @@ input:focus {
   width: 300px;
   padding: 10px;
   text-align: center;
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: none;
   background-color: #d6d5d551;
 }
@@ -355,7 +370,7 @@ input:focus {
   width: 220px;
   padding: 10px;
   text-align: center;
-  border-radius: 50px;
+  border-radius: var(--btn-br);
   border: solid .5px var(--dark-accent-clr);
   background-color: var(--dark-accent-clr);
   color: #666
@@ -374,16 +389,37 @@ input:focus {
   margin: 10px 0 0 0;
 }
 
+#overview-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #2e2e30;
+  border-radius: var(--container-br);
+  margin-bottom: 20px;
+}
+
+.totals {
+  font-size: 2rem;
+  margin-bottom: -10px;
+}
+
+#purple-status {
+  color: var(--dark-accent-clr-purple);
+}
+
+#pink-status {
+  color: var(--dark-accent-clr);
+}
+
 #area-chart {
   background-color: #2e2e30;
   padding: 15px 20px 15px 20px;
-  border-radius: 10px;
+  border-radius: var(--container-br);
 }
 
 .bar-container {
   background-color: #2e2e30;
   margin: 10px;
-  border-radius: 10px;
+  border-radius: var(--container-br);
   padding-bottom: 20px;
 }
 
@@ -397,5 +433,67 @@ input:focus {
   font-size: 1.5rem;
 }
 
+/* =============
+ project styling  
+ ============== */
+
+ #proj-container {
+   padding-top: 100px;
+ }
+
+ #delete-container {
+   display: flex;
+   justify-content: space-between;
+   margin-top: 0px;
+ }
+
+ .delete-btn {
+  background-color: var(--delete-red);
+  border-radius: var(--btn-br);
+  border: 2px solid var(--delete-red);
+  
+  width: 90px;
+  height: 40px;
+  font-size: 1.1rem;
+  color: var(--dark-background-clr);
+ }
+
+ .delete-btn:hover {
+  background-color: var(--dark-background-clr);
+  color: var(--delete-red);
+  cursor: pointer;
+ }
+
+ .proj-container h2 {
+    font-size: 3.5rem;
+    margin-bottom: -18px;
+ }
+
+ .proj-container h3 {
+    margin-top: 100px;
+    font-size: 2rem;
+ }
+ .proj-container p, .proj-container label {
+   font-size: 1.2rem;
+   color: rgba(255, 255, 255, 0.659);
+ }
+
+ .proj-container a {
+    font-size: 2rem;
+    text-decoration: none;
+    color: #fff;
+ }
+
+ .delete-confirm {
+   margin-top: 20px;
+ }
+
+ .proj-container a:hover {
+    color: var(--dark-accent-clr);
+ }
+
+ .back-arrow {
+  margin-top: 100px;
+ }
 
 

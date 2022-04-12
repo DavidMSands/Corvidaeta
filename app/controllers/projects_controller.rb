@@ -10,6 +10,17 @@ class ProjectsController < ApplicationController
         user = User.find(params[:id])
         render json: user.projects.all
     end
+    
+    def show 
+        project = Project.find(params[:id])
+        render json: project
+    end
+
+    def destroy 
+        project = Project.find(params[:id])
+        project.destroy
+        head :no_content
+    end
 
     private 
 
