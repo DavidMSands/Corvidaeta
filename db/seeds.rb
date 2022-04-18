@@ -1,5 +1,5 @@
-User.create(name: 'David Sands', email: "Davidmaxsands@gmail.com", password: '0')
-User.create(name: 'Sam', email: "Sam@gmail.com", password: '0')
+User.create(name: 'David Sands', email: "Davidmaxsands@gmail.com", is_dark: "true", password: '0')
+User.create(name: 'Sam', email: "Sam@gmail.com", is_dark: "true", password: '0')
 
 Project.create(project_name: "FireStock", url: "example.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam scelerisque elementum justo id fermentum. Nunc lorem velit, tincidunt eleifend sodales ac, ultricies quis dui. Etiam bibendum placerat dolor id imperdiet. Vivamus lobortis neque ante, nec vehicula nisl imperdiet ac.", generated_proj_id: 'C1437744913717', user_id: 1)
 Project.create(project_name: "Reaper Pepper", url: "example.com", description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lobortis neque ante, nec vehicula nisl imperdiet ac.", generated_proj_id: 'C1195391283095', user_id: 1)

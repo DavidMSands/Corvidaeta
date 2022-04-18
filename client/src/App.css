@@ -1,9 +1,31 @@
-:root {
-  --dark-background-clr: #26272e;
-  --dark-accent-clr: #ff7597;
-  --dark-accent-clr-purple: #bb86fc;
+:root, html[data-theme="dark"] {
+  --background-clr: #26272e;
+  --accent-clr: #ff7597;
+  --accent-clr-purple: #bb86fc;
   --delete-red: #ff4d6a;
-  --dark-text-clr: rgb(242, 242, 242);
+  --text-clr: #fff;
+  --sub-text: rgb(242, 242, 242);
+  --input-clr: #ffffffaf;
+  /* --sub-text: rgba(255, 255, 255, 0.508); */
+  --chart-bg-clr: #2e2e30;
+
+  --header-text: minion-pro, serif;
+  --secondary-text: 'Lato', sans-serif;
+
+  --btn-br: 50px;
+  --container-br: 10px;
+}
+
+html[data-theme="light"] {
+  --background-clr: rgb(242, 241, 241);
+  --accent-clr: #e66988;
+  --accent-clr-purple: #a879e3;
+  --sub-text: rgb(0, 0, 0);
+  --delete-red: #e6455f;
+  --text-clr: rgb(19, 19, 19);
+  --sub-text: rgb(65, 65, 65);
+  --input-clr: #c2c2c2;
+  --chart-bg-clr: #ffffff;
 
   --header-text: minion-pro, serif;
   --secondary-text: 'Lato', sans-serif;
@@ -13,8 +35,8 @@
 }
 
 body {
-  background-color: var(--dark-background-clr);
-  color: var(--dark-text-clr);
+  background-color: var(--background-clr);
+  color: var(--text-clr);
 }
 
 h2 {
@@ -38,13 +60,20 @@ h2 {
  nav bar styling 
  ============= */
 
+ #nav-container {
+  position: sticky;
+  top: .6rem;
+  align-self: start;
+ }
+
 #logo {
   max-width: 200px;
+  margin-top: 50px;
+  margin-bottom: -50px;
 }
 
 nav {
-  border-left: solid 1px var(--dark-text-clr);
-  
+  border-left: solid 1px var(--text-clr);
 }
 
 nav ul {
@@ -56,7 +85,7 @@ nav ul li {
 }
 
 nav ul li a {
-  color: var(--dark-text-clr);
+  color: var(--text-clr);
   text-decoration: none;
   font-family: var(--secondary-text);
   /* line-height: 3; */
@@ -65,7 +94,7 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 nav ul li:hover {
@@ -77,25 +106,25 @@ nav ul li:hover {
 }
 
 .is-active {
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 /* ==================
 projects page styling 
 =================== */
 
-#projects-container {
+#projects-container, #account-container {
   margin-top: 40px;
 }
 
-#projects-container h2 {
+#projects-container h2, #account-container h2 {
   font-size: 3.5rem;
 }
 
-#projects-container p, #projects-container label {
+#projects-container p, #projects-container label, #account-container p {
   font-size: 1.5rem;
-  margin-bottom: 100px;
-  color: rgba(255, 255, 255, 0.659);
+  margin-bottom: 50px;
+  color: var(--sub-text);
 }
 
 #project-input, #confirm {
@@ -106,7 +135,7 @@ projects page styling
     text-align: center;
     border-radius: var(--btn-br);
     border: none;
-    background-color: #ffffffaf;
+    background-color: var(--input-clr);
 }
 
 #myModal p {
@@ -118,29 +147,29 @@ projects page styling
     text-align: center;
     border-radius: 20px;
     border: none;
-    background-color: #ffffffaf;
+    background-color: var(--input-clr);
     color: black;
     text-align: left;
     font-size: 1.1rem;
 }
 
 ::-webkit-input-placeholder {
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
   font-size: 1.2rem;
 }
 
 ::-moz-placeholder {
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
   font-size: 1.2rem;
 }
 
 :-ms-input-placeholder {
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
   font-size: 1.2rem;
 }
 
 :-moz-placeholder {
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
   font-size: 1.2rem;
 }
 
@@ -149,35 +178,39 @@ projects page styling
   margin-right: 20px;
 }
 
-.new-proj-submit {
-  background-color: var(--dark-accent-clr);
+.new-proj-submit, .update {
+  background-color: var(--accent-clr);
   border-radius: var(--btn-br);
-  border: 2px solid var(--dark-accent-clr);
-  margin: 15px 0 0 140px;
+  border: 2px solid var(--accent-clr);
+  margin: 0px 0 0 30px;
   width: 90px;
-  height: 40px;
+  height: 35px;
   font-size: 1.1rem;
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
+}
+
+.new-proj-submit {
+  margin: 15px 0 0 140px;
 }
 
 .button {
-  background-color: var(--dark-accent-clr);
+  background-color: var(--accent-clr);
   border-radius: var(--btn-br);
-  border: 2px solid var(--dark-accent-clr);
+  border: 2px solid var(--accent-clr);
   margin: 0px 0 0 210px;
   width: 90px;
   height: 40px;
   font-size: 1.1rem;
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
 }
 
 input:focus {
-  outline-color: var(--dark-accent-clr);
+  outline-color: var(--accent-clr);
 }
 
-#new-proj-submit:hover, .new-proj-submit:hover, .button:hover, #sign-btn:hover, .logout-btn:hover {
-  background-color: var(--dark-background-clr);
-  color: var(--dark-accent-clr);
+#new-proj-submit:hover, .new-proj-submit:hover, .button:hover, #sign-btn:hover, .logout-btn:hover, .update:hover {
+  background-color: var(--background-clr);
+  color: var(--accent-clr);
   cursor: pointer;
 }
 
@@ -213,7 +246,7 @@ input:focus {
 
 
 .modal-content {
-    background-color: var(--dark-background-clr);
+    background-color: var(--background-clr);
     border: 1px solid gray;
     z-index: 1000;
     width: 800px;
@@ -230,13 +263,13 @@ input:focus {
   padding-bottom: 20px;
 }
 
-#projects-container h3 {
+#projects-container h3, #account-container h3 {
   font-size: 2rem;
   margin-top: 100px;
 }
 
 .ech-project-container {
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--text-clr);
   padding: 10px 0 10px 0;
   display: flex;
   justify-content: space-between;
@@ -248,7 +281,7 @@ input:focus {
 }
 
 .open-snippet {
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 .open-snippet:hover {
@@ -257,16 +290,16 @@ input:focus {
 
 #my-projects {
   margin-top: 100px;
-  border-top: .5px solid var(--dark-accent-clr);
+  border-top: .5px solid var(--accent-clr);
 }
 
 .ech-project-container a {
   text-decoration: none;
-  color: #fff;
+  color: var(--text-clr);
 }
 
 .ech-project-container a:hover {
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 /* =============
@@ -285,13 +318,13 @@ input:focus {
 }
 
 #sign-btn, .logout-btn {
-  background-color: var(--dark-accent-clr);
+  background-color: var(--accent-clr);
   border-radius: var(--btn-br);
-  border: 2px solid var(--dark-accent-clr);
+  border: 2px solid var(--accent-clr);
   width: 90px;
   height: 40px;
   font-size: 1.1rem;
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
 }
 
 #login-container {
@@ -332,11 +365,11 @@ input:focus {
 
 .input-field p:hover {
   cursor: pointer;
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 .field:focus {
-  outline-color: var(--dark-accent-clr);
+  outline-color: var(--accent-clr);
 }
 
 .icon {
@@ -352,7 +385,7 @@ input:focus {
   text-align: center;
   border-radius: var(--btn-br);
   border: none;
-  background-color: #d6d5d551;
+  background-color: var(--input-clr);
 }
 
 .field2 {
@@ -371,13 +404,13 @@ input:focus {
   padding: 10px;
   text-align: center;
   border-radius: var(--btn-br);
-  border: solid .5px var(--dark-accent-clr);
-  background-color: var(--dark-accent-clr);
+  border: solid .5px var(--accent-clr);
+  background-color: var(--accent-clr);
   color: #666
 }
 
 .button:hover {
-  background-color: var(--dark-background-clr);
+  background-color: var(--background-clr);
   cursor: pointer;
 }
 
@@ -389,10 +422,18 @@ input:focus {
   margin: 10px 0 0 0;
 }
 
+#bar-container h2, #area-chart h2, #overview-container p, #proj-label { 
+  color: var(--text-clr)
+}
+
+#proj-label {
+  padding-right: 10px;
+}
+
 #overview-container {
   display: flex;
   justify-content: space-around;
-  background-color: #2e2e30;
+  background-color: var(--chart-bg-clr);
   border-radius: var(--container-br);
   margin-bottom: 20px;
 }
@@ -403,21 +444,21 @@ input:focus {
 }
 
 #purple-status {
-  color: var(--dark-accent-clr-purple);
+  color: var(--accent-clr-purple);
 }
 
 #pink-status {
-  color: var(--dark-accent-clr);
+  color: var(--accent-clr);
 }
 
 #area-chart {
-  background-color: #2e2e30;
+  background-color: var(--chart-bg-clr);
   padding: 15px 20px 15px 20px;
   border-radius: var(--container-br);
 }
 
 .bar-container {
-  background-color: #2e2e30;
+  background-color: var(--chart-bg-clr);
   margin: 10px;
   border-radius: var(--container-br);
   padding-bottom: 20px;
@@ -455,11 +496,11 @@ input:focus {
   width: 90px;
   height: 40px;
   font-size: 1.1rem;
-  color: var(--dark-background-clr);
+  color: var(--background-clr);
  }
 
  .delete-btn:hover {
-  background-color: var(--dark-background-clr);
+  background-color: var(--background-clr);
   color: var(--delete-red);
   cursor: pointer;
  }
@@ -481,7 +522,7 @@ input:focus {
  .proj-container a {
     font-size: 2rem;
     text-decoration: none;
-    color: #fff;
+    color: var(--text-clr);
  }
 
  .delete-confirm {
@@ -489,11 +530,123 @@ input:focus {
  }
 
  .proj-container a:hover {
-    color: var(--dark-accent-clr);
+    color: var(--accent-clr);
  }
 
  .back-arrow {
   margin-top: 100px;
  }
 
+ /* ============
+  footer styling  
+  ============= */
+
+  #footer-container {
+    max-width: 500px;
+    text-align: center;
+    margin: auto;
+    margin-top: 200px
+  }
+
+  #legal-container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .seperator {
+    border-right: 2px solid gray;
+    padding-right: 28px
+  }
+
+  .footer-text  {
+    text-decoration: none;
+    color: var(--text-clr);
+  }
+
+  a  {
+    text-decoration: none;
+  }
+
+  .footer-text:hover {
+    cursor: pointer;
+    color: var(--accent-clr);
+  }
+
+  /* =============
+   account styling 
+   =============== */
+
+   .switch {
+     position: relative;
+     display: inline-block;
+     width: 60px;
+     height: 34px;
+   }
+
+   .switch input {
+     opacity: 0;
+     width: 0;
+     height: 0;
+   }
+
+   .slider {
+     position: absolute;
+     cursor: pointer;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     background-color: #535357;
+     border-radius: 34px;
+   }
+
+   .slider:before {
+     position: absolute;
+     content: "";
+     height: 26px;
+     width: 26px;
+     left: 4px;
+     bottom: 4px;
+     background-color: #fff;
+     transition: 400ms;
+     border-radius: 50px;
+   }
+
+   .slider-icon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 5px;
+    bottom: 6px;
+    color: rgb(255, 247, 0);
+    transition: 400ms;
+    display: none;
+    transition: 400ms;
+   }
+
+   .slider-icon-moon {
+    position: absolute;
+    height: 20px;
+    width: 20px;
+    left: 33px;
+    bottom: 6px;
+    color: rgb(255, 247, 0);
+    transition: 400ms;
+   }
+
+   input:checked + .slider:before {
+     transform: translateX(26px);
+   }
+
+   input:checked ~ .slider-icon {
+     display: block;
+   }
+
+   input:checked ~ .slider-icon-moon {
+    display: none;
+  }
+
+  #check-mark {
+    color: green;
+  }
 

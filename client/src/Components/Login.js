@@ -1,12 +1,13 @@
 import React from 'react'
 import { useState } from 'react'
-import logo from '../logo.svg'
 import { BsFillPersonFill } from 'react-icons/bs';
 import { MdEmail,  } from 'react-icons/md'
 import { FaLock } from 'react-icons/fa';
-import logo2 from '../Data/CORVIDAETA.svg'
 
-function Login({ onLogin }) {
+import logo from '../Data/CORVIDAETA (3).svg'
+import lightLogo from '../Data/CORVIDAETA (4).svg'
+
+function Login({ onLogin, isDark }) {
   const [showLogin, setShowLogin] = useState(true)
   const [showErrorMsg, setShowErrorMsg] = useState(false)
   const [errorMsg, setErrorMsg] = useState('')
@@ -56,7 +57,7 @@ function Login({ onLogin }) {
     {/* <hr className="blockline"></hr> */}
       <div id="login-container">
         {/* <img src={logo} alt="logo" id="login-logo"/> */}
-        <img src={logo2} alt='logo2' id="logo2"/>
+        <img src={ isDark ? logo : lightLogo } alt='logo' id='logo2'/>
         <div className="forms">
         {showLogin ?
         <form id="login">
@@ -88,7 +89,6 @@ function Login({ onLogin }) {
               </div>
           </form> :
           <form id="signup">
-              {/* <h1>Join Twiddle Wakka today</h1> */}
               <div className="input-field">
               <i><BsFillPersonFill className='icon' /></i>
               <label htmlFor="name"></label>

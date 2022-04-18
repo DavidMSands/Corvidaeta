@@ -1,12 +1,13 @@
 import React from 'react'
 import { NavLink, useNavigate } from "react-router-dom"
-import logo from '../Data/Add a subheading.svg'
+import logo from '../Data/CORVIDAETA (3).svg'
+import lightLogo from '../Data/CORVIDAETA (4).svg'
 import { FaFeatherAlt } from 'react-icons/fa'
 
-function NavBar({handleLogout}) {
+function NavBar({ handleLogout, isDark }) {
   return (
     <div id='nav-container'>
-      <img src={logo} alt='logo' id='logo'/>
+      <img src={ isDark ? logo : lightLogo } alt='logo' id='logo'/>
       <nav>
           <ul className='nav-links'>
             <li className='nav-effect'><NavLink to="/projects" className={({ isActive }) => (isActive ? 'is-active' : 'inactive')}><FaFeatherAlt className='feather'/> Projects</NavLink></li>

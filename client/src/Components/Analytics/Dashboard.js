@@ -8,7 +8,7 @@ import '../../react_dates_overrides.css'
 
 
 
-function Dashboard({ setShowNavBar }) {
+function Dashboard({ setShowNavBar, isDark }) {
   const [data1, setData1] = useState(false)
   const [data2, setData2] = useState()
   const [data3, setData3] = useState()
@@ -174,10 +174,10 @@ function Dashboard({ setShowNavBar }) {
           <Tooltip />
           {showViews ? <Area type={isSharp ? "" : "monotone"} dataKey="count" stroke="#bb86fc" fill='#bb86fc' /> : null }
           {showVisitors ? <Area type={isSharp ? "" : "monotone"} dataKey="unique" stroke="#fa6c90" fill='#ff7598bf' /> : null }
-          <CartesianGrid stroke="#fff" strokeDasharray="3 3"  />
-          <XAxis dataKey="name" stroke="#fff" />
+          <CartesianGrid stroke={isDark ? "#fff" : "#000"} strokeDasharray="3 3"  />
+          <XAxis dataKey="name" stroke={isDark ? "#fff" : "#000"} />
           <Legend />
-          <YAxis stroke="#fff" hide />
+          <YAxis stroke={isDark ? "#fff" : "#000"} hide />
         </AreaChart>
       </div>
       <div id="bar-container">
@@ -201,7 +201,7 @@ function Dashboard({ setShowNavBar }) {
                   <YAxis type="category" hide  />
                   <Tooltip />
                   <Bar dataKey="count" fill="#ff7598bf">
-                    <LabelList dataKey="page" fill="#fff"  position='insideLeft' />
+                    <LabelList dataKey="page" fill={isDark ? "#fff" : "#000"}  position='insideLeft' />
                   </Bar>
                 </BarChart>
             </div>
@@ -225,7 +225,7 @@ function Dashboard({ setShowNavBar }) {
                   <YAxis type="category" hide />
                   <Tooltip />
                   <Bar dataKey="count" fill="#ff7598bf">
-                    <LabelList dataKey="is_mobile" fill="#fff" position='insideLeft'/>
+                    <LabelList dataKey="is_mobile" fill={isDark ? "#fff" : "#000"} position='insideLeft'/>
                   </Bar>
                 </BarChart>
               </div>
@@ -250,7 +250,7 @@ function Dashboard({ setShowNavBar }) {
                 <YAxis type="category" hide />
                 <Tooltip />
                 <Bar dataKey="count" fill="#ff7598bf">
-                <LabelList dataKey="country" fill="#fff" position='insideLeft'/>
+                <LabelList dataKey="country" fill={isDark ? "#fff" : "#000"} position='insideLeft'/>
                 </Bar>
               </BarChart>
           </div>
@@ -272,7 +272,7 @@ function Dashboard({ setShowNavBar }) {
                 <YAxis type="category" hide />
                 <Tooltip />
                 <Bar dataKey="count" fill="#ff7598bf">
-                <LabelList dataKey="referral" fill="#fff" position='insideLeft' />
+                <LabelList dataKey="referral" fill={isDark ? "#fff" : "#000"} position='insideLeft' />
                 </Bar>
               </BarChart>
             </div>

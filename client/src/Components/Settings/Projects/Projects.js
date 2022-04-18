@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import EachProject from './EachProject'
 
+
 function Projects({ setShowNavBar }) {
   const [projects, setProjects] = useState([])
   const [projectName, setProjectName] = useState()

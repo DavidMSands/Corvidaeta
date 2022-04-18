@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :durations
   resources :analytics
   resources :projects, only: [:create, :show, :destroy]
-  resources :users, only: [:create]
+  resources :users, only: [:create, :update, :destroy, :show]
   post "/login", to: "sessions#create"
 
   get '/total_views/:id,:project_id,:start_date,:end_date', to: "analytics#total_views"
@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get '/countries/:id,:project_id,:start_date,:end_date', to: "analytics#countries"
   get '/referral_site/:id,:project_id,:start_date,:end_date', to: "analytics#referral"
   get '/average_time_on_site/:id,:project_id,:start_date,:end_date', to: "durations#time"
+
 
   get "/me", to: "sessions#show"
   get '/my_projects/:id', to: 'projects#my_projects'
