@@ -4,7 +4,15 @@ import logo from '../Data/CORVIDAETA (3).svg'
 import lightLogo from '../Data/CORVIDAETA (4).svg'
 import { FaFeatherAlt } from 'react-icons/fa'
 
-function NavBar({ handleLogout, isDark }) {
+function NavBar({ onLogout, isDark }) {
+  const navigate = useNavigate()
+  function handleLogout() {
+    fetch('/logout', {
+      method: 'DELETE',
+    }).then(() => onLogout())
+    navigate('/login')
+  }
+
   return (
     <div id='nav-container'>
       <img src={ isDark ? logo : lightLogo } alt='logo' id='logo'/>

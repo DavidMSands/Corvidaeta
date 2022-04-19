@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get '/referral_site/:id,:project_id,:start_date,:end_date', to: "analytics#referral"
   get '/average_time_on_site/:id,:project_id,:start_date,:end_date', to: "durations#time"
 
-
+  delete '/logout', to: 'sessions#destroy'
   get "/me", to: "sessions#show"
   get '/my_projects/:id', to: 'projects#my_projects'
   post '/create_analytics/:generated_proj_id', to: 'analytics#create_analytics'

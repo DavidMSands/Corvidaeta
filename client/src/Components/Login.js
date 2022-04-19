@@ -25,7 +25,38 @@ function Login({ onLogin, isDark }) {
   function handleSignupSubmit(e) {
     e.preventDefault()
     const userObj = { name, email, password, password_confirmation: passwordConfirmation }
-    submitFetch(userObj, '/users')
+    fetch('/users', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj ),
+    })
+      .then(r => {
+        if (r.ok) {
+          r.json().then((user) => console.log(user)) 
+        } else {
+          r.json().then(data => setErrorMsg(() => data.errors))
+          setShowErrorMsg(true)
+          setPassword("")
+        }
+      })
+    singupSubmit(userObj)
+  }
+
+  function singupSubmit (userObj) {
+    fetch('/login', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(userObj ),
+    })
+    .then(r => {
+      if (r.ok) {
+        r.json().then((user) => onLogin(user)) 
+      }
+    })
   }
 
   function submitFetch(userObj, routeString) { 
@@ -46,6 +77,7 @@ function Login({ onLogin, isDark }) {
         }
       }) 
   }
+  
 
   function handleChangeForm() {
     setShowLogin(!showLogin)

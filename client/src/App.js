@@ -1,7 +1,7 @@
 import './App.css';
 import Account from './Components/Settings/Profile/Account'
 import Login from './Components/Login'
-import Privacy from './Components/Settings/Privacy/Privacy'
+// import Privacy from './Components/Settings/Privacy/Privacy'
 import Dashboard from './Components/Analytics/Dashboard'
 import Projects from './Components/Settings/Projects/Projects'
 import WelcomePage from './Components/WelcomePage';
@@ -73,7 +73,7 @@ function App() {
 
   return (
     <div className={showNavBar ? "App split" : null} >
-      {showNavBar ? <NavBar handleLogout={handleLogout} isDark={isDark} /> : null}
+      {showNavBar ? <NavBar onLogout={handleLogout} isDark={isDark} /> : null}
        <div>
          <Routes >
             <Route exact path="/" element={<WelcomePage />} />
@@ -81,7 +81,7 @@ function App() {
             <Route exact path="/account" element={<Account user={user} setIsDark={setIsDark} isDark={isDark} toggle={toggle} setShowNavBar={setShowNavBar} />} />
             <Route exact path="/projects" element={<Projects user={user} setShowNavBar={setShowNavBar} />} />
             <Route exact path="/dashboard" element={<Dashboard user={user} setShowNavBar={setShowNavBar} isDark={isDark} />} />
-            <Route exact path="/privacy" element={<Privacy />} />
+            {/* <Route exact path="/privacy" element={<Privacy />} /> */}
             <Route exact path="/login" element={<Login onLogin={handleLogin} isDark={isDark} />} />
             <Route exact path="/payments" element={<PaymentsSub />} />
             <Route exact path="/projects/:id" element={<Project />} />

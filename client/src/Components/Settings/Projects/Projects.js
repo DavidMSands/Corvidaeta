@@ -21,6 +21,7 @@ function Projects({ setShowNavBar }) {
       }
     }) 
   }, [])
+  console.log(user)
 
   useEffect(() => {
     fetch(`/my_projects/${user?.id}`)
@@ -35,7 +36,7 @@ function Projects({ setShowNavBar }) {
       const newObj = {
         project_name: projectName,
         generated_proj_id: generatedProjId,
-        user_id: 1
+        user_id: user.id
       }
       fetch('/projects', {
         method: 'POST', 
