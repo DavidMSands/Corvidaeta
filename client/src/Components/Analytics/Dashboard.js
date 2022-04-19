@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import { AreaChart, BarChart, Bar, Legend, LabelList, Area, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts'
+import { AreaChart, Legend, Area, CartesianGrid, Tooltip, XAxis, YAxis} from 'recharts'
 import "react-dates/initialize";
 import "react-dates/lib/css/_datepicker.css";
 import { DateRangePicker } from "react-dates";
 import { HiStatusOnline } from 'react-icons/hi'
 import '../../react_dates_overrides.css'
+import BarComponent from './Bar'
 
 
 
@@ -191,96 +192,24 @@ function Dashboard({ setShowNavBar, isDark }) {
           <div className='bar-container'>
             <h2>Pages</h2>
             <div className="bar">
-              <BarChart
-                  width={500}
-                  height={300}
-                  data={data2}
-                  layout='vertical'
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" hide />
-                  <YAxis type="category" hide  />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#ff7598bf">
-                    <LabelList dataKey="page" fill={isDark ? "#fff" : "#000"}  position='insideLeft' />
-                  </Bar>
-                </BarChart>
+              <BarComponent isDark={isDark} data={data2} keyData='page'/>
             </div>
           </div>
             <div className='bar-container'>
             <h2>Mobile</h2>
               <div class="bar">
-                <BarChart
-                  width={500}
-                  height={300}
-                  data={data3}
-                  layout='vertical'
-                  margin={{
-                    top: 5,
-                    right: 30,
-                    left: 20,
-                    bottom: 5,
-                  }}>
-                  <CartesianGrid strokeDasharray="3 3" />
-                  <XAxis type="number" hide />
-                  <YAxis type="category" hide />
-                  <Tooltip />
-                  <Bar dataKey="count" fill="#ff7598bf">
-                    <LabelList dataKey="is_mobile" fill={isDark ? "#fff" : "#000"} position='insideLeft'/>
-                  </Bar>
-                </BarChart>
+              <BarComponent isDark={isDark} data={data3} keyData='is_mobile'/>
               </div>
             </div>
         </div>
         <div class="split">
           <div className='bar-container'>
             <h2>Countries</h2>
-            <BarChart
-                width={500}
-                height={300}
-                data={data4}
-                layout='vertical'
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" hide />
-                <YAxis type="category" hide />
-                <Tooltip />
-                <Bar dataKey="count" fill="#ff7598bf">
-                <LabelList dataKey="country" fill={isDark ? "#fff" : "#000"} position='insideLeft'/>
-                </Bar>
-              </BarChart>
+            <BarComponent isDark={isDark} data={data4} keyData='country'/>
           </div>
             <div className='bar-container'>
             <h2>Referral site</h2>
-              <BarChart
-                width={500}
-                height={300}
-                data={data5}
-                layout='vertical'
-                margin={{
-                  top: 5,
-                  right: 30,
-                  left: 20,
-                  bottom: 5,
-                }}>
-                <CartesianGrid strokeDasharray="3 3" />
-                <XAxis type="number" hide  />
-                <YAxis type="category" hide />
-                <Tooltip />
-                <Bar dataKey="count" fill="#ff7598bf">
-                <LabelList dataKey="referral" fill={isDark ? "#fff" : "#000"} position='insideLeft' />
-                </Bar>
-              </BarChart>
+            <BarComponent isDark={isDark} data={data5} keyData='referral'/>
             </div>
         </div>
       </div>

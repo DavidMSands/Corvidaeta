@@ -23,7 +23,7 @@ function App() {
   const navigate = useNavigate()
   const [pageLoaded, setPageLoaded] = useState(false)
   const state = useLocation()
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
   
   const toggle = () => {
     setIsDark(!isDark)
@@ -55,11 +55,11 @@ function App() {
     }) 
   }, [])
 
-  useEffect(() => {
-    fetch(`/users/${user?.id}`)
-    .then(res => res.json())
-    .then(data => setIsDark(data.is_dark))
-  }, [user])
+  // useEffect(() => {
+  //   fetch(`/users/${user?.id}`)
+  //   .then(res => res.json())
+  //   .then(data => setIsDark(data.is_dark))
+  // }, [user])
   
   
 
