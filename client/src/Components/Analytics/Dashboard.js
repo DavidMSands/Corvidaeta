@@ -35,8 +35,14 @@ function Dashboard({ setShowNavBar, isDark }) {
 
   const handleOnDateChange = (startDate, endDate) =>
   setdateRange(startDate, endDate);
+ 
 
-  const pathParams = `${user?.id},${currentProject},${startDate === null ? convert(oneWeekPast) : convert(startDate?._d)},${endDate === null ? convert(new Date()) : convert(endDate?._d)}`
+  let todaysDate = new Date()
+  todaysDate.setDate(todaysDate.getDate() + 1 )
+
+  console.log(convert(todaysDate))
+
+  const pathParams = `${user?.id},${currentProject},${startDate === null ? convert(oneWeekPast) : convert(startDate?._d)},${endDate === null ? convert(todaysDate) : convert(endDate?._d)}`
   console.log(data1)
   useEffect(() => {
     fetch('/me').then(r => {

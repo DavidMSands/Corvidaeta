@@ -8,7 +8,7 @@ function Projects({ setShowNavBar }) {
   const [modalObj, setModalObj] = useState()
   const [hideModal, setHideModal] = useState('modal')
   const [user, setUser] = useState(null)
-  const [pageLoaded, setPageLoaded] = useState(false)
+  
 
   useEffect(() => {
     fetch('/me').then(r => {
@@ -71,7 +71,7 @@ function Projects({ setShowNavBar }) {
             <label htmlFor='project'>Generated Project ID: </label>
             <input name='project' id='project-input' type='text' value={modalObj?.generated_proj_id} ></input><br/>
             <label>Embed code: </label>
-            <p>&lt;script defer id='{modalObj?.generated_proj_id}' class="corvidaeta_script" src="https://cdn.jsdelivr.net/gh/DavidMSands/Corvidaeta-Script@new-latest-script/var%20currentURL%20=%20window.location.href;.js"&gt;&lt;/script&gt;</p>
+            <p>&lt;script defer id='{modalObj?.generated_proj_id}' class="corvidaeta_script" src="https://cdn.jsdelivr.net/gh/DavidMSands/Corvidaeta-Script@final/var%20currentURL%20=%20window.location.href;.js"&gt;&lt;/script&gt;</p>
             <br/>
           </form>
           <button className='button' onClick={() => setHideModal('modal')}>Close</button>     

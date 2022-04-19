@@ -10,6 +10,7 @@ import Payments from './Components/Settings/Payments';
 import NavBar from './Components/NavBar';
 import Project from './Components/Settings/Projects/Project';
 import Footer from './Components/Footer';
+import PaymentsSub from './Components/Settings/Profile/PaymentsSub';
 import { useNavigate } from 'react-router';
 import { Routes, Route, useLocation } from "react-router-dom"
 import { useState, useEffect } from 'react'
@@ -22,7 +23,7 @@ function App() {
   const navigate = useNavigate()
   const [pageLoaded, setPageLoaded] = useState(false)
   const state = useLocation()
-  const [isDark, setIsDark] = useState(true)
+  const [isDark, setIsDark] = useState(false)
   
   const toggle = () => {
     setIsDark(!isDark)
@@ -57,7 +58,7 @@ function App() {
   useEffect(() => {
     fetch(`/users/${user?.id}`)
     .then(res => res.json())
-    .then(data => console.log(data))
+    .then(data => setIsDark(data.is_dark))
   }, [user])
   
   
@@ -77,12 +78,12 @@ function App() {
          <Routes >
             <Route exact path="/" element={<WelcomePage />} />
             <Route exact path="/settings" element={<Settings />} />
-            <Route exact path="/account" element={<Account user={user} setIsDark={setIsDark} isDark={isDark} toggle={toggle} />} />
+            <Route exact path="/account" element={<Account user={user} setIsDark={setIsDark} isDark={isDark} toggle={toggle} setShowNavBar={setShowNavBar} />} />
             <Route exact path="/projects" element={<Projects user={user} setShowNavBar={setShowNavBar} />} />
             <Route exact path="/dashboard" element={<Dashboard user={user} setShowNavBar={setShowNavBar} isDark={isDark} />} />
             <Route exact path="/privacy" element={<Privacy />} />
             <Route exact path="/login" element={<Login onLogin={handleLogin} isDark={isDark} />} />
-            <Route exact path="/payments" element={<Payments />} />
+            <Route exact path="/payments" element={<PaymentsSub />} />
             <Route exact path="/projects/:id" element={<Project />} />
           </Routes>
           {showNavBar ? <Footer /> : null}

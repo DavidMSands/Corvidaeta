@@ -1,7 +1,7 @@
 import React from 'react'
-import logo from '../Data/Add a subheading.svg'
+import logo from '../Data/CORVIDAETA (3).svg'
 import { NavLink, useNavigate } from "react-router-dom"
-import screenshot from '../Data/Greenshot 2022-04-09 18.11.36.png'
+import screenshot from '../Data/Greenshot 2022-04-17 22.47.50.png'
 
 function WelcomePage() {
   return (
