@@ -117,11 +117,11 @@ projects page styling
   margin-top: 40px;
 }
 
-#projects-container h2, #account-container h2, #payment-container h2 {
+#projects-container h2, #account-container h2, #payment-container h2, #welcome-paragraph h2, #steps-container h2 {
   font-size: 3.5rem;
 }
 
-#projects-container p, #projects-container label, #account-container p {
+#projects-container p, #projects-container label, #account-container p, #welcome-paragraph p, #steps-container p {
   font-size: 1.5rem;
   margin-bottom: 50px;
   color: var(--sub-text);
@@ -315,9 +315,59 @@ input:focus {
   text-align: center;
 }
 
+#welcome-header {
+  display: flex;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+}
+
+#welcome-header img {
+  max-width: 400px;
+}
+
+#welcome-header button {
+  margin-top: 170px;
+  margin-right: -500px;
+  border-bottom: 1px solid var(--accent-clr);
+}
+
+#welcome-container img {
+  margin-bottom: -50px;
+}
+
 #welcome-paragraph {
-  padding: 0 300px 0 300px;
+  max-width: 1000px;
+  margin: auto;
   font-size: 1.5rem;
+  text-align: left;
+}
+
+#welcome-paragraph img {
+  max-width: 330px;
+  padding-left: 20px;
+  float: right;
+}
+
+#steps-container {
+  text-align: left;
+  max-width: 1000px;
+  margin: 100px auto auto auto;
+}
+
+#steps {
+  display: flex;
+  justify-content: space-between;
+}
+
+.step-paragraph {
+  height: 40px;
+  padding-top: 10px;
+}
+
+.line {
+  border-right: 1px solid var(--accent-clr);
+  padding-right: 65px;
 }
 
 #sign-btn, .logout-btn {

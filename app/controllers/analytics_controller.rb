@@ -7,19 +7,19 @@ class AnalyticsController < ApplicationController
     end
 
     def total_views
-        user_analytics = find_user_analytics.map{ |a| {project_id: a.project_id, date: a.created_at.to_date - 1.day } }
+        user_analytics = find_user_analytics.map{ |a| {project_id: a.project_id, date: a.created_at.in_time_zone('Mountain Time (US & Canada)').to_date } }
         each = user_analytics.pluck(:date)
         t = each.tally.map{ |e| {name: e[0], count: e[1] }}
         render json: t
     end
 
     def pages_visted  
-        user_analytics = find_user_analytics.map{ |a| { page: a.page_path, date: a.created_at.to_date - 1.day } }
+        user_analytics = find_user_analytics.map{ |a| { page: a.page_path, date: a.created_at.in_time_zone('Mountain Time (US & Canada)').to_date } }
         render json: user_analytics.pluck(:page).tally.map{ |e| {page: e[0], count: e[1] }}
     end
 
     def unique_views
-        user_analytics = find_user_analytics .map{ |a| {date: a.created_at.to_date - 1.day, ip: a.user_ip } }
+        user_analytics = find_user_analytics .map{ |a| {date: a.created_at.in_time_zone('Mountain Time (US & Canada)').to_date, ip: a.user_ip } }
         each2 = user_analytics.pluck(:date).tally.map{ |e| {count: e[1] }}
         each = user_analytics.pluck(:date, :ip).map{ |a| {name: a[0], unique: "#{a[0]}" + "#{a[1]}" }}.uniq.pluck(:name).tally.map{ |e| { name: e[0], unique_count: e[1] }}
         merge = each.zip(each2).flat_map { |each, each2| {name: each.values[0], count: each2.values[0], unique: each.values[1]}}
@@ -27,12 +27,12 @@ class AnalyticsController < ApplicationController
     end
 
     def countries 
-        user_analytics = find_user_analytics.map{ |a| {date: a.created_at.to_date - 1.day, country: a.user_country_name } }
+        user_analytics = find_user_analytics.map{ |a| {date: a.created_at.in_time_zone('Mountain Time (US & Canada)').to_date, country: a.user_country_name } }
         render json: user_analytics.pluck(:country).tally.map{ |e| {country: e[0], count: e[1] }}
     end
 
     def device 
-        user_analytics = find_user_analytics.map{ |a| { is_mobile: a.is_mobile, date: a.created_at.to_date - 1.day } }
+        user_analytics = find_user_analytics.map{ |a| { is_mobile: a.is_mobile, date: a.created_at.in_time_zone('Mountain Time (US & Canada)').to_date } }
         render json: user_analytics.pluck(:is_mobile).tally.map{ |e| {is_mobile: e[0].to_s, count: e[1] }}
     end
 
